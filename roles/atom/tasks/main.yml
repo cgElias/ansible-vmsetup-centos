@@ -1,0 +1,23 @@
+---
+- name: Download Atom (Debian)
+  get_url: url="{{ atom_git_url }}{{ atom_version }}/{{ atom_git_file }}" dest={{ download_directory }}
+  tags: ["packages", "atom"]
+
+- name: Install Atom (Debian)
+  apt: deb={{ download_directory }}
+  tags: ["packages", "atom"]
+
+- name: Setup permissions
+  file:
+    path: ~/.atom/
+    state: directory
+    recurse: yes
+    owner: elias
+
+- name: Showing apm version
+  command: apm -v
+  register: result
+
+- debug:
+    #msg="{{ lookup('pipe','apm -v') }}"
+    var: result.stdout_lines

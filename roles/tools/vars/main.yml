@@ -1,0 +1,7 @@
+---
+tools:
+  - net-tools
+  - telnet
+  - atop
+  - rsync
+  - netcat

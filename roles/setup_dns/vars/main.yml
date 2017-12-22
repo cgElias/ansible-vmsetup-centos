@@ -1,0 +1,4 @@
+---
+dns_provider: "none"
+path_resolv_conf: "/etc/resolv.conf"
+path_network_manager_conf: "/etc/NetworkManager/NetworkManager.conf"

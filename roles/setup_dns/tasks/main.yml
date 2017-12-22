@@ -1,0 +1,15 @@
+---
+- name: Disable Network Manager handling of resolv.conf
+  lineinfile:
+    path: "{{ path_network_manager_conf }}"
+    regexp: '^dns='
+    line: 'dns={{ dns_provider }}'
+
+- name: Delete resolv.conf
+  file:
+    path: "{{ path_resolv_conf }}"
+    state: absent
+
+- name: Create new resolv.conf
+  copy:
+    content="nameserver {{ custom_dns }}" dest="{{ path_resolv_conf }}"

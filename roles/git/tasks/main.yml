@@ -1,0 +1,6 @@
+---
+  - name: Update package cache and install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes

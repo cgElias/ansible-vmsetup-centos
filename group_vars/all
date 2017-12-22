@@ -1,0 +1,28 @@
+---
+# user
+user_custom: "elias"
+
+# Atom version
+# use the tag on: https://github.com/atom/atom/releases
+atom_version: "v1.23.1"
+
+
+# Docker version
+# to list docker versions: apt-cache madison docker-ce
+docker_version: "17.09.1~ce-0~ubuntu"
+docker_autostart: true
+
+# Ubuntu dist (output from lsb_release -cs)
+dist: "xenial"
+
+# IntelliJ version/build
+# IntelliJ builds and build numbers are available at:
+# https://www.jetbrains.com/intellij-repository/releases
+intelliJ_build_number: "173.4127.17"
+
+# Openjdk version
+openjdk_version: "openjdk-8-jdk"
+
+# Custom nameserver
+#custom_dns: "10.44.22.222"
+custom_dns: "127.0.1.1"

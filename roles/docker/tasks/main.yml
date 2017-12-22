@@ -1,0 +1,64 @@
+---
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install requirements
+  apt: name={{ item }} state=present
+  with_items: "{{ requirements }}"
+
+- name: Add dockers gpg key
+  apt_key:
+    url: "{{ docker_gpg_url }}"
+    state: present
+
+- name: Verify gpg key
+  command: apt-key fingerprint 0EBFCD88
+  register: key
+
+- debug:
+    var: key.stdout_lines
+
+- name: Determine ubuntu dist
+  command: lsb_release -cs
+  register: release
+
+- name: Add Docker stable repository
+  apt_repository:
+    repo: deb [arch=amd64] {{ docker_repository_url }} {{ dist }} stable
+    state: present
+
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install docker version {{ docker_version }}
+  apt:
+    name: docker-ce={{ docker_version }}
+
+- name: Set docker container service autostart to enabled
+  command: echo "Set docker container service autostart to enabled"
+  notify:
+    - enable autostart docker
+  when: docker_autostart
+
+- name: Set docker container service autostart to disabled
+  command: echo "Set docker container service autostart to disabled"
+  notify:
+    - disable autostart docker
+  when: not docker_autostart
+
+- name: Make sure docker container service is started
+  command: echo "Starting docker container service"
+  notify:
+    - start docker container service
+
+# Execute handlers before verifying docker installation
+- meta: flush_handlers
+
+- name: Verify docker installation
+  command: docker run hello-world
+  register: docker_output
+
+- debug:
+    var: docker_output.stdout_lines

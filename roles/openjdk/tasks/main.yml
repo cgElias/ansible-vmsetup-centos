@@ -1,0 +1,10 @@
+---
+  - name: Add OpenJDK8 PPA
+    apt_repository:
+      repo: "{{ openjdk_repository }}"
+      state: present
+
+  - name: Update apt cache and install openjdk ({{ openjdk_version }})
+    apt:
+      name: "{{ openjdk_version }}"
+      update_cache: yes

@@ -1,0 +1,15 @@
+---
+- name: Setup Local Environment
+  hosts: localhost
+  become: true
+#  sudo: yes
+  roles:
+    #- setup_dns
+    - { role: git, tags: ["git"] }
+    - { role: tools, tags: ["tools"] }
+    - { role: atom, tags: ["atom"] }
+    - { role: openjdk, tags: ["openjdk"] }
+    - { role: intellij, tags: ["intellij"] }
+    - { role: docker, tags: ["docker"] }
+    - { role: jenkins, tags: ["jenkins"] }
+    - { role: gitlab, tags: ["gitlab"] }

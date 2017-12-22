@@ -1,0 +1,8 @@
+---
+  docker_repository_url: "https://download.docker.com/linux/ubuntu"
+  docker_gpg_url: "https://download.docker.com/linux/ubuntu/gpg"
+  requirements:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
