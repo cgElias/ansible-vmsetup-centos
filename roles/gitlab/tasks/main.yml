@@ -9,7 +9,7 @@
 
   - name: Run gitlab as docker container
     become: true
-    command: "docker run --detach --name gitlab \
+    command: "docker run --detach --rm --name gitlab \
     --publish 10022:22 --publish 10080:80 \
     --hostname gitlab-container.vm \
     --volume /srv/gitlab/config:/etc/gitlab \
