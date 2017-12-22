@@ -1,21 +1,71 @@
 version: "3"
 services:
-  gitlab:
-    build: ../gitlab/image
-    image: tattioff/gitlab
-    deploy:
-      restart_policy:
-        condition: on-failure
-    healthcheck: 
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 10s
-      timeout: 10s
-      retries: 2
+  # gitlab:
+  #   image: 'gitlab/gitlab-ce:latest'
+  #   restart: always
+  #   hostname: 'gitlab-container.vm'
+  #   # healthcheck:
+  #   #   test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+  #   #   interval: 20s
+  #   #   timeout: 20s
+  #   environment:
+  #     #   GITLAB_OMNIBUS_CONFIG: |
+  #     #     external_url 'https://gitlab.example.com'
+  #     #     # Add any other gitlab.rb configuration here, each on its own line
+  #     - ENV GITLAB_PORT=10080
+  #     - ENV GITLAB_SSH_PORT=10022
+  #   ports:
+  #     - '10080:80'
+  #     - '443:443'
+  #     - '10022:22'
+  #   volumes:
+  #     - '/srv/gitlab/config:/etc/gitlab'
+  #     - '/srv/gitlab/logs:/var/log/gitlab'
+  #     - '/srv/gitlab/data:/var/opt/gitlab'
+  jenkins:
+    image: 'tattioff/jenkins'
+    restart: always
+    hostname: 'jenkins-container.vm'
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+    #   interval: 20s
+    #   timeout: 20s
+    # environment:
+    #  - ENV GITLAB_PORT=10080
+    #  - ENV GITLAB_SSH_PORT=10022
     ports:
-      - "10080:10080"
-      - "10022:10022"
-    networks:
-      - devnet
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - 'jenkins-data-new:/var/jenkins_home'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+# version: "3"
+# services:
+#   gitlab:
+#     #build: ../gitlab/image
+#     # image: tattioff/gitlab
+#     image: gitlab/gitlab-ce:latest
+#     user: root
+#     # hostname: gitlab-container.vm
+#     deploy:
+#       restart_policy:
+#         condition: none
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:80"]
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 2
+#     ports:
+#       - "10080:80"
+#       - "10022:22"
+#     volumes:
+#       - /srv/gitlab/config3:/etc/gitlab
+#       - /srv/gitlab/logs3:/var/log/gitlab
+#       - /srv/gitlab/data3:/var/opt/gitlab
+#       # - /srv/gitlab/logs3/reconfigure:/var/log/gitlab/reconfigure
+#     privileged: true
+#     networks:
+#       - devnet
   # jenkins:
   #   image: jenkins/jenkins.alpine
   #   build:
@@ -27,33 +77,33 @@ services:
   #   deploy:
   #     restart_policy:
   #       condition: on-failure
-  #     healthcheck: 
+  #     healthcheck:
   #       test: ["CMD-SHELL", "sudo ping -w 3 localhost || exit 1"]
   #       interval: 10s
   #       timeout: 10s
   #       retries: 2
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-    networks:
-      - devnet
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - /c/Users/etatros/Documents/Projects/docker-setup-environment/data:/data
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-    command: redis-server --appendonly yes
-    networks:
-      - devnet
+  # visualizer:
+  #   image: dockersamples/visualizer:stable
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #   networks:
+  #     - devnet
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /c/Users/etatros/Documents/Projects/docker-setup-environment/data:/data
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #   command: redis-server --appendonly yes
+  #   networks:
+  #     - devnet
 networks:
   devnet:

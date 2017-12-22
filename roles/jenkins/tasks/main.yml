@@ -7,14 +7,14 @@
       - "jenkins_build"
       - "jenkins"
 
- - name: run jenkins in docker container
-   command: "docker run -d -p 8080:8080 -p 50000:50000 --rm --hostname jenkins-container.vm --name jenkins-docker \
-   -v jenkins-data-new:/var/jenkins_home \
-   -v /var/run/docker.sock:/var/run/docker.sock \
-   jenkins-docker"
-   tags:
-     - jenkins_run
-     - jenkins
+  - name: run jenkins in docker container
+    command: "docker run -d -p 8080:8080 -p 50000:50000 --rm --hostname jenkins-container.vm --name jenkins-docker \
+    -v jenkins-data-new:/var/jenkins_home \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    jenkins-docker"
+    tags:
+      - jenkins_run
+      - jenkins
 
 
 #  - name: run jenkins in docker container
