@@ -5,6 +5,18 @@ services:
   #   hostname: 'test-container.vm'
   #   networks:
   #     - devnet
+  artifact-server:
+    image: 'tattioff/artifact-server'
+    #user: "root"
+    #working_dir: /home/node/app
+    #environment:
+    #  - NODE_ENV=production
+    volumes:
+      - '/srv/layers:/home/node/app'
+    ports:
+      - 80:80
+    networks:
+      - devnet
   postgres:
     image: 'postgres'
     restart: always
@@ -12,6 +24,8 @@ services:
       POSTGRES_PASSWORD: admin
       #POSTGRES_USER
       #POSTGRES_DB
+    volumes:
+      - 'postgres-data:/var/lib/postgresql/data'
     networks:
       - devnet
   adminer:
@@ -21,19 +35,23 @@ services:
       - 8085:8080
     networks:
       - devnet
+  clair:
+    image: 'quay.io/coreos/clair:v2.0.0'
+    command: -config=/config/config.yaml
+    ports:
+      - 6060:6060
+      - 6061:6061
+    volumes:
+      - '/srv/clair/config:/config'
+    networks:
+      - devnet
+  # curl -i -X GET dev_clair:6060/v1/namespaces/debian%3A7/vulnerabilities?limit=2
   #docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     hostname: 'gitlab-container.vm'
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
-    #   interval: 20s
-    #   timeout: 20s
     environment:
-      #   GITLAB_OMNIBUS_CONFIG: |
-      #     external_url 'https://gitlab.example.com'
-      #     # Add any other gitlab.rb configuration here, each on its own line
       - ENV GITLAB_PORT=10080
       - ENV GITLAB_SSH_PORT=10022
     ports:
@@ -83,6 +101,7 @@ services:
   #     - devnet
 volumes:
   jenkins-data-new:
+  postgres-data:
 
 networks:
   devnet:
