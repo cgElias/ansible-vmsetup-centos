@@ -1,5 +1,10 @@
 version: "3"
 services:
+  test:
+    image: 'tattioff/ubuntu-test:latest'
+    hostname: 'test-container.vm'
+    networks:
+      - devnet
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
