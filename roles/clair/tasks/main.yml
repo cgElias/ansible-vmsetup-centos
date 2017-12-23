@@ -1,0 +1,5 @@
+---
+  - name: pull clair from registry
+    command: docker pull quay.io/coreos/clair
+
+  #-
