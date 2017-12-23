@@ -1,25 +1,25 @@
----
-- name: enable autostart docker
-  systemd:
-    name: docker
-    enabled: yes
-
-- name: disable autostart docker
-  systemd:
-    name: docker
-    enabled: no
-
-- name: start docker container service
-  systemd:
-    name: docker
-    state: started
-
-- name: stop docker container service
-  systemd:
-    name: docker
-    state: stopped
-
-- name: restart docker container service
-  systemd:
-    name: docker
-    state: restarted
+# ---
+# - name: enable autostart docker
+#   systemd:
+#     name: docker
+#     enabled: yes
+#
+# - name: disable autostart docker
+#   systemd:
+#     name: docker
+#     enabled: no
+#
+# - name: start docker container service
+#   systemd:
+#     name: docker
+#     state: started
+#
+# - name: stop docker container service
+#   systemd:
+#     name: docker
+#     state: stopped
+#
+# - name: restart docker container service
+#   systemd:
+#     name: docker
+#     state: restarted
