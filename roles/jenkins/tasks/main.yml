@@ -8,7 +8,7 @@
       - "jenkins"
 
   - name: run jenkins in docker container
-    command: "docker run -u root --rm -d --name jenkins \
+    command: "docker run -u root --rm -d --privileged --name jenkins \
     --hostname jenkins-container.vm \
     -p 8080:8080 -p 50000:50000 \
     -v jenkins-data:/var/jenkins_home \
