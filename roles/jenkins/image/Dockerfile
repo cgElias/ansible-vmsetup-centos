@@ -5,7 +5,7 @@ LABEL maintainer "elias.tatros@capgemini.com"
 
 
 # set a health HEALTHCHECK
-HEALTHCHECK --interval=10s --timeout=10s CMD ping -w 3 localhost || exit 1
+HEALTHCHECK --interval=10s --timeout=10s CMD sudo ping -w 3 localhost || exit 1
 
 ARG USER_JENKINS=jenkins
 ARG USER_ROOT=root
