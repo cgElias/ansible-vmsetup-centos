@@ -1,0 +1,59 @@
+version: "3"
+services:
+  gitlab:
+    build: ../gitlab/image
+    image: tattioff/gitlab
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck: 
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 10s
+      retries: 2
+    ports:
+      - "10080:10080"
+      - "10022:10022"
+    networks:
+      - devnet
+  # jenkins:
+  #   image: jenkins/jenkins.alpine
+  #   build:
+  #     args:
+  #       USER_JENKINS: jenkins
+  #       USER_ROOT: root
+  #       GROUP_DOCKER: docker
+  #       GROUP_DOCKER_GID: 1001
+  #   deploy:
+  #     restart_policy:
+  #       condition: on-failure
+  #     healthcheck: 
+  #       test: ["CMD-SHELL", "sudo ping -w 3 localhost || exit 1"]
+  #       interval: 10s
+  #       timeout: 10s
+  #       retries: 2
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - devnet
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /c/Users/etatros/Documents/Projects/docker-setup-environment/data:/data
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    command: redis-server --appendonly yes
+    networks:
+      - devnet
+networks:
+  devnet:
