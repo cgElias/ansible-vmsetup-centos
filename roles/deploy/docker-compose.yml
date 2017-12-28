@@ -43,49 +43,6 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
       - devnet
-# version: "3"
-# services:
-#   gitlab:
-#     #build: ../gitlab/image
-#     # image: tattioff/gitlab
-#     image: gitlab/gitlab-ce:latest
-#     user: root
-#     # hostname: gitlab-container.vm
-#     deploy:
-#       restart_policy:
-#         condition: none
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:80"]
-    #   interval: 10s
-    #   timeout: 10s
-    #   retries: 2
-#     ports:
-#       - "10080:80"
-#       - "10022:22"
-#     volumes:
-#       - /srv/gitlab/config3:/etc/gitlab
-#       - /srv/gitlab/logs3:/var/log/gitlab
-#       - /srv/gitlab/data3:/var/opt/gitlab
-#       # - /srv/gitlab/logs3/reconfigure:/var/log/gitlab/reconfigure
-#     privileged: true
-#     networks:
-#       - devnet
-  # jenkins:
-  #   image: jenkins/jenkins.alpine
-  #   build:
-  #     args:
-  #       USER_JENKINS: jenkins
-  #       USER_ROOT: root
-  #       GROUP_DOCKER: docker
-  #       GROUP_DOCKER_GID: 1001
-  #   deploy:
-  #     restart_policy:
-  #       condition: on-failure
-  #     healthcheck:
-  #       test: ["CMD-SHELL", "sudo ping -w 3 localhost || exit 1"]
-  #       interval: 10s
-  #       timeout: 10s
-  #       retries: 2
   # visualizer:
   #   image: dockersamples/visualizer:stable
   #   ports:
