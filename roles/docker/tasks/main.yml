@@ -73,11 +73,11 @@
   command: curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine
 
 - name: Set /tmp/docker-machine permissions
-  - file:
-      path: /tmp/docker-machine
-      mode: "u+x,g+x,o+x"
+  file:
+    path: /tmp/docker-machine
+    mode: "u+x,g+x,o+x"
 
 - name: copy /tmp/docker-machine to /usr/local/bin/docker-machine
-  - copy:
-      src: /tmp/docker-machine
-      dest: /usr/local/bin/docker-machine
+  copy:
+    src: /tmp/docker-machine
+    dest: /usr/local/bin/docker-machine
