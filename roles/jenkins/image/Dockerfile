@@ -52,4 +52,4 @@ COPY docker-socket.sh /
 ENTRYPOINT ["/docker-socket.sh"]
 
 # Expose Port
-EXPOSE 8080 50000
+EXPOSE 8081 50000
