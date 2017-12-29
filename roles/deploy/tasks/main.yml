@@ -3,7 +3,7 @@
   file: path={{ item }} 
         state=directory 
         mode="u=rwx,g=rwx,o=rx"
-  with_items: gitlab_directories
+  with_items: "{{ gitlab_directories}}"
 
 - name: Create this VMs local gitlab directories manually
   file: 
