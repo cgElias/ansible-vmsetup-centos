@@ -54,7 +54,7 @@
     - start docker container service
 
 - name: Execute handlers before verifying docker installation
-- meta: flush_handlers
+  meta: flush_handlers
 
 - name: Verify docker installation
   command: docker run hello-world
