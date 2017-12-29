@@ -29,18 +29,18 @@ services:
       - '/srv/gitlab/data:/var/opt/gitlab'
     networks:
       - devnet
-  # jenkins:
-  #   image: 'tattioff/jenkins'
-  #   restart: always
-  #   hostname: 'jenkins-container.vm'
-  #   ports:
-  #     - '8080:8080'
-  #     - '50000:50000'
-  #   volumes:
-  #     - 'jenkins-data-new:/var/jenkins_home'
-  #     - '/var/run/docker.sock:/var/run/docker.sock'
-  #   networks:
-  #     - devnet
+  jenkins:
+    image: 'tattioff/jenkins'
+    restart: always
+    hostname: 'jenkins-container.vm'
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - 'jenkins-data-new:/var/jenkins_home'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - devnet
   # visualizer:
   #   image: dockersamples/visualizer:stable
   #   ports:
