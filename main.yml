@@ -13,3 +13,4 @@
     - { role: docker, tags: ["docker"] }
     - { role: jenkins, tags: ["jenkins"] }
     - { role: gitlab, tags: ["gitlab"] }
+    - { role: deploy, tags: ["deploy"] }
