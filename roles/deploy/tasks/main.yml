@@ -1,0 +1,6 @@
+---
+- name: Create this VMs local gitlab directories
+  file: path={{ item }} 
+        state=directory 
+        mode="u=rwx,g=rwx,o=rx"
+  with_items: gitlab_directories
