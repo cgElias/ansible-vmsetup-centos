@@ -24,9 +24,9 @@ services:
       - '443:443'
       - '10022:22'
     volumes:
-      - '/srv/gitlab/config:/etc/gitlab'
-      - '/srv/gitlab/logs:/var/log/gitlab'
-      - '/srv/gitlab/data:/var/opt/gitlab'
+      - 'gitlabconfig:/etc/gitlab'
+      - 'gitlablogs:/var/log/gitlab'
+      - 'gitlabdata:/var/opt/gitlab'
     networks:
       - devnet
   jenkins:
@@ -73,6 +73,9 @@ services:
   #     - devnet
 volumes:
   jenkins-data-new:
+  gitlabdata:
+  gitlablogs:
+  gitlabconfig:
 
 networks:
   devnet:
