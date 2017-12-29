@@ -29,25 +29,18 @@ services:
       - '/srv/gitlab/data:/var/opt/gitlab'
     networks:
       - devnet
-  jenkins:
-    image: 'tattioff/jenkins'
-    restart: always
-    hostname: 'jenkins-container.vm'
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
-    #   interval: 20s
-    #   timeout: 20s
-    # environment:
-    #  - ENV GITLAB_PORT=10080
-    #  - ENV GITLAB_SSH_PORT=10022
-    ports:
-      - '8080:8080'
-      - '50000:50000'
-    volumes:
-      - 'jenkins-data-new:/var/jenkins_home'
-      - '/var/run/docker.sock:/var/run/docker.sock'
-    networks:
-      - devnet
+  # jenkins:
+  #   image: 'tattioff/jenkins'
+  #   restart: always
+  #   hostname: 'jenkins-container.vm'
+  #   ports:
+  #     - '8080:8080'
+  #     - '50000:50000'
+  #   volumes:
+  #     - 'jenkins-data-new:/var/jenkins_home'
+  #     - '/var/run/docker.sock:/var/run/docker.sock'
+  #   networks:
+  #     - devnet
   # visualizer:
   #   image: dockersamples/visualizer:stable
   #   ports:
