@@ -5,8 +5,19 @@
         mode="u=rwx,g=rwx,o=rx"
   with_items: "{{ gitlab_directories}}"
 
-- name: Create this VMs local gitlab directories manually
-  file: 
-    path: "/srv/gitlab/logs"
-    state: directory 
-    mode: "u=rwx,g=rwx,o=rx"
+- name: Initialize docker swarm manager
+  become: true
+  command: "docker swarm init"
+
+- name: Tear down any existing "dev" stack
+  become: true
+  command: "docker stack rm dev"
+
+- name: Copy docker-compose.yml to /tmp/docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /tmp/docker-compose.yml
+
+- name: Deploy stack on swarm "dev"
+  become: true
+  command: "docker stack deploy -c /tmp/docker-compose.yml dev"
