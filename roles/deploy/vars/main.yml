@@ -1,0 +1,8 @@
+gitlab_logs:   "/srv/gitlab/logs"
+gitlab_data:  "/srv/gitlab/data"
+gitlab_config: "/srv/gitlab/config"
+
+gitlab_directories:
+  - "{{ gitlab_logs }}"
+  - "{{ gitlab_data }}"
+  - "{{ gitlab_config }}"
