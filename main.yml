@@ -11,6 +11,6 @@
     - { role: openjdk, tags: ["openjdk"] }
     - { role: intellij, tags: ["intellij"] }
     - { role: docker, tags: ["docker"] }
+    - { role: deploy, tags: ["deploy"] }
     - { role: jenkins, tags: ["jenkins"] }
     - { role: gitlab, tags: ["gitlab"] }
-    - { role: deploy, tags: ["deploy"] }
