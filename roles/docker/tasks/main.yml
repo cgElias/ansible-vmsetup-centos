@@ -36,25 +36,25 @@
   apt:
     name: docker-ce={{ docker_version }}
 
-# - name: Set docker container service autostart to enabled
-#   command: echo "Set docker container service autostart to enabled"
-#   notify:
-#     - enable autostart docker
-#   when: docker_autostart
-#
-# - name: Set docker container service autostart to disabled
-#   command: echo "Set docker container service autostart to disabled"
-#   notify:
-#     - disable autostart docker
-#   when: not docker_autostart
-#
-# - name: Make sure docker container service is started
-#   command: echo "Starting docker container service"
-#   notify:
-#     - start docker container service
+- name: Set docker container service autostart to enabled
+  command: echo "Set docker container service autostart to enabled"
+  notify:
+    - enable autostart docker
+  when: docker_autostart
 
-# Execute handlers before verifying docker installation
-# - meta: flush_handlers
+- name: Set docker container service autostart to disabled
+  command: echo "Set docker container service autostart to disabled"
+  notify:
+    - disable autostart docker
+  when: not docker_autostart
+
+- name: Make sure docker container service is started
+  command: echo "Starting docker container service"
+  notify:
+    - start docker container service
+
+Execute handlers before verifying docker installation
+- meta: flush_handlers
 
 - name: Verify docker installation
   command: docker run hello-world
@@ -64,13 +64,15 @@
     var: docker_output.stdout_lines
 
 - name: Install Docker Compose
-  command: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+  command: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }} -o /usr/local/bin/docker-compose
 
 - name: Set /usr/local/bin/docker-compose permissions
-  command: chmod +x /usr/local/bin/docker-compose
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: "u+x,g+x,o+x"
 
 - name: Install docker-machine
-  command: curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine
+  command: curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-{{ ansible_system }}-{{ ansible_userspace_architecture }} >/tmp/docker-machine
 
 - name: Set /tmp/docker-machine permissions
   file:
