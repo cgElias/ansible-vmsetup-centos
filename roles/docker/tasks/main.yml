@@ -53,7 +53,7 @@
   notify:
     - start docker container service
 
-Execute handlers before verifying docker installation
+- name: Execute handlers before verifying docker installation
 - meta: flush_handlers
 
 - name: Verify docker installation
