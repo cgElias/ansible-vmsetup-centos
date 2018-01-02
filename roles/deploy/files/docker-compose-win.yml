@@ -1,0 +1,74 @@
+version: "3"
+services:
+  # test:
+  #   image: 'tattioff/ubuntu-test:latest'
+  #   hostname: 'test-container.vm'
+  #   networks:
+  #     - devnet
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab-container.vm'
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+    #   interval: 20s
+    #   timeout: 20s
+    environment:
+      #   GITLAB_OMNIBUS_CONFIG: |
+      #     external_url 'https://gitlab.example.com'
+      #     # Add any other gitlab.rb configuration here, each on its own line
+      - ENV GITLAB_PORT=10080
+      - ENV GITLAB_SSH_PORT=10022
+    ports:
+      - '10080:80'
+      - '443:443'
+      - '10022:22'
+    volumes:
+      - 'gitlab-config:/etc/gitlab'
+      - 'gitlab-logs:/var/log/gitlab'
+      - 'gitlab-data:/var/opt/gitlab'
+    networks:
+      - devnet
+  jenkins:
+    image: 'tattioff/jenkins'
+    restart: always
+    hostname: 'jenkins-container.vm'
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - 'jenkins-data-new:/var/jenkins_home'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - devnet
+  # visualizer:
+  #   image: dockersamples/visualizer:stable
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #   networks:
+  #     - devnet
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /c/Users/etatros/Documents/Projects/docker-setup-environment/data:/data
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #   command: redis-server --appendonly yes
+  #   networks:
+  #     - devnet
+volumes:
+  jenkins-data-new:
+  gitlab-config:
+  gitlab-logs:
+  gitlab-data:
+
+networks:
+  devnet:
