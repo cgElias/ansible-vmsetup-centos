@@ -5,6 +5,18 @@ services:
   #   hostname: 'test-container.vm'
   #   networks:
   #     - devnet
+  postgres:
+    image: 'postgres'
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      #POSTGRES_USER
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8085:8080
+  docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
