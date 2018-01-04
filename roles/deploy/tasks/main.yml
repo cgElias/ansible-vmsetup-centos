@@ -10,6 +10,15 @@
     src: ../../clair/files/config.yaml
     dest: /srv/clair/config/config.yaml
 
+- name: Copy Jenkins priv key
+  copy:
+    src: ../../jenkins/files/jenkins.ssh.priv
+    dest: /srv/ssh-keys/jenkins/id_rsa
+
+- name: Copy Jenkins pub key
+  copy:
+    src: ../../jenkins/files/jenkins.ssh.pub
+    dest: /srv/ssh-keys/jenkins/id_rsa.pub
 # - name: Initialize docker swarm manager
 #   become: true
 #   ignore_errors: yes
