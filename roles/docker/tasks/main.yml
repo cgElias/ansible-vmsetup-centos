@@ -71,6 +71,9 @@
     path: /usr/local/bin/docker-compose
     mode: "u+x,g+x,o+x"
 
+- name: Login to Docker Hub
+  command: docker login -u {{ docker_username }} -p {{ docker_password }}
+
 # - name: Install docker-machine
 #   command: curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-{{ ansible_system }}-{{ ansible_userspace_architecture }} >/tmp/docker-machine
 

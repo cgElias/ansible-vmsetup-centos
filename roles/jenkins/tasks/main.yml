@@ -5,7 +5,6 @@
     command: "docker build roles/jenkins/image -t tattioff/jenkins:latest"
     tags:
       - "jenkins_build"
-      - "jenkins"
 
   - name: run jenkins in docker container
     command: "docker run -d -p 8080:8080 -p 50000:50000 --rm --hostname jenkins-container.vm --name jenkins-docker \
@@ -13,19 +12,4 @@
     -v /var/run/docker.sock:/var/run/docker.sock \
     jenkins-docker"
     tags:
-      - jenkins_run
-      - jenkins
-
-
-#  - name: run jenkins in docker container
-#    command: "docker run -u root --rm -d --privileged --name jenkins \
-#    --hostname jenkins-container.vm \
-#    -p 8080:8080 -p 50000:50000 \
-#    -v jenkins-data:/var/jenkins_home \
-#    -v /var/run/docker.sock:/var/run/docker.sock \
-#    -v /usr/bin/docker:/usr/bin/docker \
-#    jenkins"
-    # jenkinsci/blueocean
-#    tags:
-#      - jenkins_run
-#      - jenkins
+      - "jenkins_run"

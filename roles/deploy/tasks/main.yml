@@ -1,19 +1,19 @@
 ---
-- name: Create this VMs local gitlab directories
+- name: Create this VMs local directories
   file: path={{ item }} 
         state=directory 
         mode="u=rwx,g=rwx,o=rx"
-  with_items: "{{ gitlab_directories}}"
+  with_items: "{{ vm_directories}}"
 
-- name: Initialize docker swarm manager
-  become: true
-  ignore_errors: yes
-  command: "docker swarm init"
+# - name: Initialize docker swarm manager
+#   become: true
+#   ignore_errors: yes
+#   command: "docker swarm init"
 
-- name: Tear down any existing "dev" stack
-  become: true
-  ignore_errors: yes
-  command: "docker stack rm dev"
+# - name: Tear down any existing "dev" stack
+#   become: true
+#   ignore_errors: yes
+#   command: "docker stack rm dev"
 
 - name: Copy docker-compose.yml to /tmp/docker-compose.yml
   copy:

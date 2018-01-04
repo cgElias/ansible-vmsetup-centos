@@ -1,8 +1,12 @@
 gitlab_logs:   "/srv/gitlab/logs"
 gitlab_data:  "/srv/gitlab/data"
 gitlab_config: "/srv/gitlab/config"
+clair_config: "/srv/clair/config"
+artifact_server_home: "/srv/layers"
 
-gitlab_directories:
+vm_directories:
   - "{{ gitlab_logs }}"
   - "{{ gitlab_data }}"
   - "{{ gitlab_config }}"
+  - "{{ clair_config }}"
+  - "{{ artifact_server_home }}"
