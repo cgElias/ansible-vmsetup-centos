@@ -8,8 +8,8 @@
 - name: Copy clair config.yaml to /srv/clair/config
   copy:
     src: ../../clair/files/config.yaml
-    dest: /srv/clair/config.yaml
-    
+    dest: /srv/clair/config/config.yaml
+
 # - name: Initialize docker swarm manager
 #   become: true
 #   ignore_errors: yes
