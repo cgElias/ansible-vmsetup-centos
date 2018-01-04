@@ -1,6 +1,5 @@
 ---
   - name: Build Clair
-    #command: docker pull quay.io/coreos/clair
     command: docker build -t tattioff/clair ../roles/clair/image
 
   - name: Push Clair to Registry

@@ -2,7 +2,7 @@
   docker_repository_url: "https://download.docker.com/linux/ubuntu"
   docker_gpg_url: "https://download.docker.com/linux/ubuntu/gpg"
   docker_username: "tattioff"
-  docker_password: "mist\$docker"
+  docker_password: "mist$docker"
   requirements:
     - apt-transport-https
     - ca-certificates

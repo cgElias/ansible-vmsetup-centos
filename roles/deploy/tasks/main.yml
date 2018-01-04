@@ -15,11 +15,11 @@
 #   ignore_errors: yes
 #   command: "docker stack rm dev"
 
-- name: Copy docker-compose.yml to /tmp/docker-compose.yml
-  copy:
-    src: docker-compose.yml
-    dest: /tmp/docker-compose.yml
+# - name: Copy docker-compose.yml to /tmp/docker-compose.yml
+#   copy:
+#     src: docker-compose.yml
+#     dest: /tmp/docker-compose.yml
 
-- name: Deploy stack on swarm "dev"
-  become: true
-  command: "docker stack deploy -c /tmp/docker-compose.yml dev"
+# - name: Deploy stack on swarm "dev"
+#   become: true
+#   command: "docker stack deploy -c /tmp/docker-compose.yml dev"
