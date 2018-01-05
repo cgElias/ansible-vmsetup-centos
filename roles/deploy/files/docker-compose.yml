@@ -76,16 +76,6 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
       - devnet
-  klar:
-    image: 'cgelias/klar'
-    restart: always
-    hostname: 'klar-container.vm'
-    environment:
-      - CLAIR_ADDR=http://dev_clair
-      - CLAIR_OUTPUT=HIGH
-      - CLAIR_THRESHOLD=2
-      - DOCKER_USER=cgelias
-      - DOCKER_PASSWORD=mist$docker
   # visualizer:
   #   image: dockersamples/visualizer:stable
   #   ports:
