@@ -3,14 +3,14 @@
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
 
+- debug: var="{{ go_path }}"
+
 - name: Grab klar source from github.com/optiopay/klar
   shell: "go get github.com/optiopay/klar"
   environment:
     GOPATH: "{{ go_path }}"
   tags:
     - "klar_build"
-
-- debug: var="{{ go_path }}"
 
 - name: Change to project Directory
   shell: "cd $GOPATH/src/github.com/optiopay/klar"
