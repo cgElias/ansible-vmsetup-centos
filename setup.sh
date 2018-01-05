@@ -65,7 +65,7 @@ wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
 sudo tar -xvf go1.9.2.linux-amd64.tar.gz
 sudo mv go /usr/local
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/elias-test/go
+export GOPATH=$HOME/elias_test/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
