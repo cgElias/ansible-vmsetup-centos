@@ -1,11 +1,11 @@
 ---
 - name: Grab klar source from github.com/optiopay/klar
-  command: go get github.com/optiopay/klar
+  command: "go get github.com/optiopay/klar"
   tags:
     - "klar_build"
 
 - name: Change to project Directory
-  command: cd $GOPATH/src/github.com/optiopay/klar
+  command: "cd $GOPATH/src/github.com/optiopay/klar"
   tags:
     - "klar_build"
 
