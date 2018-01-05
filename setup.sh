@@ -9,6 +9,8 @@ while [ "$1" != "" ]; do
       --skip-git )           skip_git=1
                             ;;
       --skip-python )         skip_python=1
+                            ;;
+      --skip-go )         skip_go=1
     esac
 
     # Shift all the parameters down by one
@@ -31,6 +33,20 @@ if [ "$skip_git" != "1"]; then
 # Install git
 echo "Setting up git.."
 sudo apt-get install git -y
+fi
+
+if [ "$skip_go" != "1"]; then
+# Install go
+echo "Setting up go.."
+mkdir -p $HOME/elias-test/go
+sudo apt-get update
+sudo apt-get -y upgrade
+wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
+sudo tar -xvf go1.9.2.linux-amd64.tar.gz
+sudo mv go /usr/local
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/elias-test/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
 if [ "$skip_python" != "1"]; then
