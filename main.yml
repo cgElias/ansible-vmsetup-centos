@@ -14,3 +14,4 @@
     - { role: deploy, tags: ["deploy"] }
     - { role: jenkins, tags: ["jenkins"] }
     - { role: gitlab, tags: ["gitlab"] }
+    - { role: klar, tags: ["klar"] }
