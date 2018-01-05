@@ -18,15 +18,17 @@ while [ "$1" != "" ]; do
     echo "You now have $# positional parameters"
 
     case $1 in
-      --skip-git )           skip_git=1
+      --skip-git )             skip_git=1
                             ;;
-      --skip-python )         skip_python=1
+      --skip-python )          skip_python=1
                             ;;
-      --skip-go )         skip_go=1
+      --skip-go )              skip_go=1
                             ;;
       --skip-ansible )         skip_ansible=1
                             ;;
-      --help )         usage
+      --skip-requirements )    skip_requirements=1
+                            ;;
+      --help )                 usage
     esac
 
     # Shift all the parameters down by one
@@ -39,11 +41,13 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+if [ "$skip_requirements" != "1"]; then
 # Update cache and essentials
 echo "Updating cache and preparing.."
 sudo apt-get update
 sudo apt-get install build-essential checkinstall -y
 sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
+fi
 
 if [ "$skip_git" != "1"]; then
 # Install git
