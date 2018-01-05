@@ -19,8 +19,12 @@
 
 - debug:
     msg: "fact: {{ go_root }}"
+    tags:
+    - "klar_build"
 - debug:
     msg: "fact: {{ go_path }}"
+    tags:
+    - "klar_build"
 
 # - set_fact:
 #     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
