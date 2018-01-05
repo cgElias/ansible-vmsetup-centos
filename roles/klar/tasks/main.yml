@@ -8,22 +8,26 @@
     - "klar_build"
 
 - set_fact:
-    go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
-  when: not result|failed
+    go_path: "/home/pnradmin/elias_test/go"
   tags:
     - "klar_build"
 
 - set_fact:
-    go_root: "{{ lookup('env', 'GOROOT') | default(ansible_env.HOME+'/go', true) }}"
-  when: not result|failed
+    go_root: "/usr/local/go"
   tags:
     - "klar_build"
 
-- set_fact:
-    path: "{{ lookup('env', 'PATH') | default(ansible_env.HOME+'/go', true) }}"
-  when: not result|failed
-  tags:
-    - "klar_build"
+# - set_fact:
+#     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
+#   when: not result|failed
+#   tags:
+#     - "klar_build"
+
+# - set_fact:
+#     go_root: "{{ lookup('env', 'GOROOT') | default(ansible_env.HOME+'/go', true) }}"
+#   when: not result|failed
+#   tags:
+#     - "klar_build"
 
 # - name: go get gogs
 #   shell: go get -u github.com/gogits/gogs
@@ -39,6 +43,7 @@
   #shell: go get -u github.com/gogits/gogs
   environment:
     GOPATH: "{{ go_path }}"
+    GOROOT: "{{ go_root }}"
   tags:
     - "klar_build"
 
