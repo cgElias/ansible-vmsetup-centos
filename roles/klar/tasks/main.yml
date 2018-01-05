@@ -1,29 +1,29 @@
 ---
 - name: Grab klar source from github.com/optiopay/klar
-  command: "go get github.com/optiopay/klar"
+  shell: "go get github.com/optiopay/klar"
   tags:
     - "klar_build"
 
 - name: Change to project Directory
-  command: "cd $GOPATH/src/github.com/optiopay/klar"
+  shell: "cd $GOPATH/src/github.com/optiopay/klar"
   tags:
     - "klar_build"
 
 - name: Build klar from source
-  command: CGO_ENABLED=0 go build -a -installsuffix cgo .
+  shell: CGO_ENABLED=0 go build -a -installsuffix cgo .
   tags:
     - "klar_build"
     
 - name: Build klar docker image
   become: true
-  command: docker build -t cgelias/klar .
+  shell: docker build -t cgelias/klar .
   tags:
     - "klar_build"  
     - "klar_docker_build"  
 
 - name: Build klar docker image
   become: true
-  command: docker push cgelias/klar
+  shell: docker push cgelias/klar
   tags:
     - "klar_docker_push"  
 
