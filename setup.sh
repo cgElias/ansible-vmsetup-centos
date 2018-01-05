@@ -14,24 +14,25 @@ while [ "$1" != "" ]; do
                             ;;
       --skip-ansible )         skip_ansible=1
                             ;;
-      --help )         show_help=1
+      --help )         usage
     esac
 
     # Shift all the parameters down by one
     shift
 done
 
-if [ "$show_help" = "1"]; then
-# Install git
-echo "Usage: sudo ./setup.sh [option]"
-echo "Available Options:"
-echo " --help                Print this message."
-echo " --skip-ansible        Skip Ansible installation."
-echo " --skip-go             Skip go installation."
-echo " --skip-python         Skip python installation."
-echo " --skip-git            Skip git installation."
-exit 0
-fi
+usage()
+{
+  # Install git
+  echo "Usage: sudo ./setup.sh [option]"
+  echo "Available Options:"
+  echo " --help                Print this message."
+  echo " --skip-ansible        Skip Ansible installation."
+  echo " --skip-go             Skip go installation."
+  echo " --skip-python         Skip python installation."
+  echo " --skip-git            Skip git installation."
+  exit 0
+}
 
 # Make sure we are root
 if [[ $EUID -ne 0 ]]; then
