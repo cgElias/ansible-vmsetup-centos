@@ -1,7 +1,15 @@
 ---
+- name: check go version
+    command: go version
+    register: result
+    changed_when: no
+    ignore_errors: true
+    
 - set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
+
+- debug: msg=
 
 - name: go get gogs
   shell: go get -u github.com/gogits/gogs
