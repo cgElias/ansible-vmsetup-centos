@@ -7,9 +7,9 @@ services:
       - 9000:9000
       - 9092:9092
     environment:
-      SONARQUBE_JDBC_USERNAME=postgres
-      SONARQUBE_JDBC_PASSWORD=admin
-      SONARQUBE_JDBC_URL=jdbc:postgresql://dev_postgres/sonar
+      - SONARQUBE_JDBC_USERNAME=postgres
+      - SONARQUBE_JDBC_PASSWORD=admin
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://dev_postgres/sonar
     networks:
       - devnet
   postgres:
