@@ -4,6 +4,8 @@
   register: result
   changed_when: no
   ignore_errors: true
+  tags:
+    - "klar_build"
 
 - set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
