@@ -67,5 +67,6 @@
 - name: Run klar as docker container
   become: true
   command: "sudo docker run --env-file=/tmp/klarconfig.env {{ docker_image }} postgres:9.5.1"
+  ignore_errors: true
   tags:
     - "klar_run"  
