@@ -47,18 +47,20 @@
   tags:
     - "klar_build"
 
-- name: Change to project Directory
-  shell: "cd $GOPATH/src/github.com/optiopay/klar"
-  environment:
-    GOPATH: "{{ go_path }}"
-  tags:
-    - "klar_build"
+# - name: Change to project Directory
+#   shell: "cd $GOPATH/src/github.com/optiopay/klar"
+#   environment:
+#     GOPATH: "{{ go_path }}"
+#   tags:
+#     - "klar_build"
 
 - name: Build klar from source
   shell: CGO_ENABLED=0 go build -a -installsuffix cgo .
   environment:
     GOPATH: "{{ go_path }}"
     GOROOT: "{{ go_root }}"
+  args:
+    chdir: $GOPATH/src/github.com/optiopay/klar
   tags:
     - "klar_build"
     
