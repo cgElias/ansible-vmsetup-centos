@@ -10,6 +10,8 @@
   tags:
     - "klar_build"
 
+- debug: var="{{ go_path }}"
+
 - name: Change to project Directory
   shell: "cd $GOPATH/src/github.com/optiopay/klar"
   tags:
