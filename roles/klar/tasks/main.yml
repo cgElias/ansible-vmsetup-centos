@@ -8,14 +8,19 @@
     - "klar_build"
 
 - set_fact:
-    go_path: "/home/pnradmin/elias_test/go"
+    go_path: "{{ lookup('env', 'GOPATH') }}"  #"/home/pnradmin/elias_test/go"
   tags:
     - "klar_build"
 
 - set_fact:
-    go_root: "/usr/local/go"
+    go_root: "{{ lookup('env', 'GOROOT') }}" #"/usr/local/go"
   tags:
     - "klar_build"
+
+- debug:
+    msg: "fact: {{ go_root }}"
+- debug:
+    msg: "fact: {{ go_path }}"
 
 # - set_fact:
 #     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
