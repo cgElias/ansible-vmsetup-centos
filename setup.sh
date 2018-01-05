@@ -14,8 +14,8 @@ usage()
 }
 
 while [ "$1" != "" ]; do
-    echo "Parameter 1 equals $1"
-    echo "You now have $# positional parameters"
+    echo "Using Option: $1"
+    # echo "You now have $# positional parameters"
 
     case $1 in
       --skip-git )             skip_git=1
