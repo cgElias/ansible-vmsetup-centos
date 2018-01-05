@@ -1,5 +1,17 @@
 #!/bin/bash
 # Entrypoint VM Setup routine
+usage()
+{
+  # Install git
+  echo "Usage: sudo ./setup.sh [option]"
+  echo "Available Options:"
+  echo " --help                Print this message."
+  echo " --skip-ansible        Skip Ansible installation."
+  echo " --skip-go             Skip go installation."
+  echo " --skip-python         Skip python installation."
+  echo " --skip-git            Skip git installation."
+  exit 0
+}
 
 while [ "$1" != "" ]; do
     echo "Parameter 1 equals $1"
@@ -20,19 +32,6 @@ while [ "$1" != "" ]; do
     # Shift all the parameters down by one
     shift
 done
-
-usage()
-{
-  # Install git
-  echo "Usage: sudo ./setup.sh [option]"
-  echo "Available Options:"
-  echo " --help                Print this message."
-  echo " --skip-ansible        Skip Ansible installation."
-  echo " --skip-go             Skip go installation."
-  echo " --skip-python         Skip python installation."
-  echo " --skip-git            Skip git installation."
-  exit 0
-}
 
 # Make sure we are root
 if [[ $EUID -ne 0 ]]; then
