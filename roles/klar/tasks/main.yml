@@ -57,12 +57,6 @@
   tags:
     - "klar_docker_build"  
 
-- name: Push klar docker image
-  become: true
-  shell: sudo docker push cgelias/klar
-  tags:
-    - "klar_docker_push"  
-
 - name: Copy klar config
   copy:
     src: klarconfig.env
@@ -72,6 +66,6 @@
 
 - name: Run klar as docker container
   become: true
-  command: docker run --env-file=/tmp/klarconfig.env klar postgres:9.5.1
+  command: docker run --env-file=/tmp/klarconfig.env "{{ docker_image }}" postgres:9.5.1
   tags:
     - "klar_run"  
