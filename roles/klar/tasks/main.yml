@@ -8,7 +8,7 @@
     - "klar_build"
 
 - set_fact:
-    go_path: "/usr/local/go/src"
+    go_path: "/home/pnradmin/elias_test/go"
   tags:
     - "klar_build"
 
