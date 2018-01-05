@@ -57,9 +57,9 @@
   tags:
     - "klar_docker_build"  
 
-- name: Build klar docker image
+- name: Push klar docker image
   become: true
-  shell: docker push cgelias/klar
+  shell: sudo docker push cgelias/klar
   tags:
     - "klar_docker_push"  
 
