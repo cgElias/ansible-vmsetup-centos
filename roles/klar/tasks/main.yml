@@ -53,7 +53,7 @@
     
 - name: Build klar docker image
   become: true
-  shell: docker build -t "{{ docker_image }}" .
+  shell: docker build -t "{{ docker_image }}"  {{ go_path }}/src/{{ klar_url }}
   tags:
     - "klar_docker_build"  
 
