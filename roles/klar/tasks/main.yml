@@ -8,17 +8,17 @@
 - set_fact:
     go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME+'/go', true) }}"
   when: not result|failed
+  tags:
+    - "klar_build"
 
-- debug: msg=
+# - name: go get gogs
+#   shell: go get -u github.com/gogits/gogs
+#   environment:
+#     GOPATH: "{{ go_path }}"
+#   register: gogs
+#   when: not result|failed
 
-- name: go get gogs
-  shell: go get -u github.com/gogits/gogs
-  environment:
-    GOPATH: "{{ go_path }}"
-  register: gogs
-  when: not result|failed
-
-- debug: var=gogs
+# - debug: var=gogs
 
 - name: Grab klar source from github.com/optiopay/klar
   shell: "go get github.com/optiopay/klar"
