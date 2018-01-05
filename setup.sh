@@ -11,11 +11,27 @@ while [ "$1" != "" ]; do
       --skip-python )         skip_python=1
                             ;;
       --skip-go )         skip_go=1
+                            ;;
+      --skip-ansible )         skip_ansible=1
+                            ;;
+      --help )         show_help=1
     esac
 
     # Shift all the parameters down by one
     shift
 done
+
+if [ "$show_help" == "1"]; then
+# Install git
+echo "Usage: sudo ./setup.sh [option]"
+echo "Available Options:"
+echo " --help                Print this message."
+echo " --skip-ansible        Skip Ansible installation."
+echo " --skip-go             Skip go installation."
+echo " --skip-python         Skip python installation."
+echo " --skip-git            Skip git installation."
+sudo apt-get install git -y
+fi
 
 # Make sure we are root
 if [[ $EUID -ne 0 ]]; then
@@ -60,12 +76,14 @@ sudo ./configure
 sudo make altinstall
 fi
 
+if [ "$skip_ansible" != "1"]; then
 # Download and Install Ansible
 echo "Setting up Ansible.."
 sudo apt-get install software-properties-common -y
 sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update 
 sudo apt-get install ansible -y
+fi
 
 # Show distribution and release
 echo "Distribution: "
