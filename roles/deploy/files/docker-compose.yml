@@ -65,7 +65,7 @@ services:
     networks:
       - devnet
   jenkins:
-    image: 'tattioff/jenkins'
+    image: 'cgelias/jenkins'
     restart: always
     hostname: 'jenkins-container.vm'
     ports:
