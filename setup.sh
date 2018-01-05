@@ -41,7 +41,7 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-if [ "$skip_requirements" != "1"]; then
+if [ "$skip_requirements" != "1" ]; then
 # Update cache and essentials
 echo "Updating cache and preparing.."
 sudo apt-get update
@@ -49,13 +49,13 @@ sudo apt-get install build-essential checkinstall -y
 sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
 fi
 
-if [ "$skip_git" != "1"]; then
+if [ "$skip_git" != "1" ]; then
 # Install git
 echo "Setting up git.."
 sudo apt-get install git -y
 fi
 
-if [ "$skip_go" != "1"]; then
+if [ "$skip_go" != "1" ]; then
 # Install go
 echo "Setting up go.."
 mkdir -p $HOME/elias-test/go
@@ -69,7 +69,7 @@ export GOPATH=$HOME/elias-test/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 fi
 
-if [ "$skip_python" != "1"]; then
+if [ "$skip_python" != "1" ]; then
 # Download and Install Python 2.7.14
 echo "Setting up Python.."
 cd /usr/src
@@ -80,7 +80,7 @@ sudo ./configure
 sudo make altinstall
 fi
 
-if [ "$skip_ansible" != "1"]; then
+if [ "$skip_ansible" != "1" ]; then
 # Download and Install Ansible
 echo "Setting up Ansible.."
 sudo apt-get install software-properties-common -y
