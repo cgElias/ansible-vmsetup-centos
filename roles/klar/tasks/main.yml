@@ -13,6 +13,18 @@
   tags:
     - "klar_build"
 
+- set_fact:
+    go_root: "{{ lookup('env', 'GOROOT') | default(ansible_env.HOME+'/go', true) }}"
+  when: not result|failed
+  tags:
+    - "klar_build"
+
+- set_fact:
+    path: "{{ lookup('env', 'PATH') | default(ansible_env.HOME+'/go', true) }}"
+  when: not result|failed
+  tags:
+    - "klar_build"
+
 # - name: go get gogs
 #   shell: go get -u github.com/gogits/gogs
 #   environment:
@@ -23,7 +35,7 @@
 # - debug: var=gogs
 
 - name: Grab klar source from github.com/optiopay/klar
-  #shell: go get github.com/optiopay/klar
+  #shell: go get   github.com/optiopay/klar
   shell: go get -u github.com/gogits/gogs
   environment:
     GOPATH: "{{ go_path }}"
