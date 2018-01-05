@@ -21,7 +21,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ "$show_help" == "1"]; then
+if [ "$show_help" = "1"]; then
 # Install git
 echo "Usage: sudo ./setup.sh [option]"
 echo "Available Options:"
