@@ -1,20 +1,15 @@
 version: "3"
 services:
-  # test:
-  #   image: 'tattioff/ubuntu-test:latest'
-  #   hostname: 'test-container.vm'
-  #   networks:
-  #     - devnet
-  artifact-server:
-    image: 'tattioff/artifact-server'
-    # user: "root"
-    # working_dir: /home/node/app
-    # environment:
-    #   - NODE_ENV=production
-    volumes:
-      - '/srv/layers:/home/node/app'
+  sonar:
+    image: sonarqube
+    restart: always
     ports:
-      - 8091:8091
+      - 9000:9000
+      - 9092:9092
+    environment:
+      SONARQUBE_JDBC_USERNAME=postgres
+      SONARQUBE_JDBC_PASSWORD=admin
+      SONARQUBE_JDBC_URL=jdbc:postgresql://dev_postgres/sonar
     networks:
       - devnet
   postgres:
@@ -97,6 +92,23 @@ services:
   #     placement:
   #       constraints: [node.role == manager]
   #   command: redis-server --appendonly yes
+  #   networks:
+  #     - devnet
+  # test:
+  #   image: 'tattioff/ubuntu-test:latest'
+  #   hostname: 'test-container.vm'
+  #   networks:
+  #     - devnet
+  # artifact-server:
+  #   image: 'tattioff/artifact-server'
+  #   # user: "root"
+  #   # working_dir: /home/node/app
+  #   # environment:
+  #   #   - NODE_ENV=production
+  #   volumes:
+  #     - '/srv/layers:/home/node/app'
+  #   ports:
+  #     - 8091:8091
   #   networks:
   #     - devnet
 volumes:
