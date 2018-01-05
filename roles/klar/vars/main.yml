@@ -1,0 +1,3 @@
+---
+klar_url: "github.com/optiopay/klar"
+docker_image: "cgelias/klar"
