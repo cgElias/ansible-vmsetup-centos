@@ -11,6 +11,7 @@ ARG USER_JENKINS=jenkins
 ARG USER_ROOT=root
 ARG GROUP_DOCKER=docker
 ARG GROUP_DOCKER_GID=1001
+ARG KLAR_URL=https://github.com/optiopay/klar/releases/download/v2.0/klar-2.0-linux-amd64
 
 # Switch to root
 USER ${USER_ROOT}
@@ -43,6 +44,10 @@ RUN set -ex; \
 
 # Add user jenkins to list of sudoers
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Install klar
+RUN curl -fSL -o /usr/bin/klar "${KLAR_URL}"
+RUN chmod +x /usr/bin/klar
 
 # Switch to user jenkins
 USER ${USER_JENKINS}
