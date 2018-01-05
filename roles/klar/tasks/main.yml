@@ -67,7 +67,6 @@
   become: true
   shell: docker build -t cgelias/klar .
   tags:
-    - "klar_build"  
     - "klar_docker_build"  
 
 - name: Build klar docker image
