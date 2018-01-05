@@ -35,8 +35,8 @@
 # - debug: var=gogs
 
 - name: Grab klar source from github.com/optiopay/klar
-  #shell: go get   github.com/optiopay/klar
-  shell: go get -u github.com/gogits/gogs
+  shell: go get   github.com/optiopay/klar
+  #shell: go get -u github.com/gogits/gogs
   environment:
     GOPATH: "{{ go_path }}"
   tags:
