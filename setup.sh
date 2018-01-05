@@ -30,7 +30,7 @@ echo " --skip-ansible        Skip Ansible installation."
 echo " --skip-go             Skip go installation."
 echo " --skip-python         Skip python installation."
 echo " --skip-git            Skip git installation."
-sudo apt-get install git -y
+exit 0
 fi
 
 # Make sure we are root
