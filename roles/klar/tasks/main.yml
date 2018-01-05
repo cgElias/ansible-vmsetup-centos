@@ -55,12 +55,10 @@
 #     - "klar_build"
 
 - name: Build klar from source
-  command: CGO_ENABLED=0 go build -a -installsuffix cgo .
+  command: cd /home/pnradmin/elias_test/go/src/github.com/optiopay/klar && CGO_ENABLED=0 go build -a -installsuffix cgo .
   environment:
     GOPATH: "{{ go_path }}"
     GOROOT: "{{ go_root }}"
-  args:
-    chdir: /home/pnradmin/elias_test/go/src/github.com/optiopay/klar
   tags:
     - "klar_build"
     
