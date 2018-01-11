@@ -51,8 +51,9 @@
 # Install Docker CE
 - name: Install docker ce
   yum:
-    name: "{{ docker_version_centos }}" # docker-ce
+    name: docker-ce
     disable_gpg_check: yes
+    state: present
 
 # Enable docker autostart
 - name: Set docker container service autostart to enabled
