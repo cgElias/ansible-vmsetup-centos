@@ -41,19 +41,24 @@
   yum: name={{ item }} state=present
   with_items: "{{ requirements }}"
 
-- name: Add docker repo
-  yum_repository:
-    name: docker-ce
-    description: docker-ce
-    baseurl: "{{ docker_repository_url_centos }}"
-    gpgcheck: no
+# - name: Add docker repo
+#   yum_repository:
+#     name: docker-ce
+#     description: docker-ce
+#     baseurl: "{{ docker_repository_url_centos }}"
+#     gpgcheck: no
 
 # Install Docker CE
-- name: Install docker ce
-  yum:
-    name: docker-ce
-    disable_gpg_check: yes
-    state: present
+# - name: Install docker ce
+#   yum:
+#     name: docker-ce
+#     disable_gpg_check: yes
+#     state: present
+- name: Update yum cache
+  command: sudo yum check-update
+
+- name: Download docker and install
+  command: curl -fsSL https://get.docker.com/ | sh
 
 # Enable docker autostart
 - name: Set docker container service autostart to enabled
@@ -61,12 +66,6 @@
   notify:
     - enable autostart docker
   when: docker_autostart
-
-- name: Set docker container service autostart to disabled
-  command: echo "Set docker container service autostart to disabled"
-  notify:
-    - disable autostart docker
-  when: not docker_autostart
 
 - name: Make sure docker container service is started
   command: echo "Starting docker container service"
