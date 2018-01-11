@@ -38,7 +38,7 @@
 #     state: present
 
 - name: Install requirements
-  apt: name={{ item }} state=present
+  yum: name={{ item }} state=present
   with_items: "{{ requirements }}"
 
 # Install Docker CE
