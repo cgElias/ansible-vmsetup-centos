@@ -41,11 +41,17 @@
   yum: name={{ item }} state=present
   with_items: "{{ requirements }}"
 
+- name: Add docker repo
+  yum_repository:
+    name: docker-ce
+    description: docker-ce
+    baseurl: "{{ docker_repository_url_centos }}"
+    gpgcheck: no
+
 # Install Docker CE
 - name: Install docker ce
   yum:
     name: "{{ docker_version_centos }}" # docker-ce
-    enablerepo: "{{ docker_repository_url_centos }}"
     disable_gpg_check: yes
 
 # Enable docker autostart
