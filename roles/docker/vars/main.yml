@@ -1,10 +1,7 @@
 ---
-  docker_repository_url: "https://download.docker.com/linux/ubuntu"
-  docker_gpg_url: "https://download.docker.com/linux/ubuntu/gpg"
-  docker_username: "tattioff"
-  docker_password: "mist$docker"
+  docker_repository_url_centos: "https://download.docker.com/linux/centos/docker-ce.repo"
+  docker_version_centos: "docker-ce-17.06.1.ce"
   requirements:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2

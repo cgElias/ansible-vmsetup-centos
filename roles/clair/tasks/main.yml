@@ -1,8 +1,0 @@
----
-  - name: Build Clair
-    command: docker build -t tattioff/clair ../roles/clair/image
-
-  - name: Push Clair to Registry
-    command: docker push tattioff/clair
-
-  #-

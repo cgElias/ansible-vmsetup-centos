@@ -1,5 +1,0 @@
----
-atom_url: "https://atom.io/download/deb"
-atom_git_url: "https://github.com/atom/atom/releases/download/"
-atom_git_file: "atom-amd64.deb"
-download_directory: "/tmp/atom.deb"

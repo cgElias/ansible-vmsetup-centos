@@ -4,14 +4,8 @@
   become: true
 #  sudo: yes
   roles:
-    #- setup_dns
     - { role: git, tags: ["git"] }
     - { role: tools, tags: ["tools"] }
-    - { role: atom, tags: ["atom"] }
-    - { role: openjdk, tags: ["openjdk"] }
-    - { role: intellij, tags: ["intellij"] }
+    - { role: httpd, tags: ["apache"] }
     - { role: docker, tags: ["docker"] }
     - { role: deploy, tags: ["deploy"] }
-    - { role: jenkins, tags: ["jenkins"] }
-    - { role: gitlab, tags: ["gitlab"] }
-    - { role: klar, tags: ["klar"] }

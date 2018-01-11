@@ -1,6 +1,5 @@
 ---
   - name: Update package cache and install git
-    apt:
+    yum:
       name: git
       state: present
-      update_cache: yes

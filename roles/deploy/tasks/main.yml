@@ -4,36 +4,3 @@
         state=directory 
         mode="u=rwx,g=rwx,o=rx"
   with_items: "{{ vm_directories}}"
-
-- name: Copy clair config.yaml to /srv/clair/config
-  copy:
-    src: ../../clair/files/config.yaml
-    dest: /srv/clair/config/config.yaml
-
-- name: Copy Jenkins priv key
-  copy:
-    src: ../../jenkins/files/jenkins.ssh.priv
-    dest: /srv/ssh-keys/jenkins/id_rsa
-
-- name: Copy Jenkins pub key
-  copy:
-    src: ../../jenkins/files/jenkins.ssh.pub
-    dest: /srv/ssh-keys/jenkins/id_rsa.pub
-# - name: Initialize docker swarm manager
-#   become: true
-#   ignore_errors: yes
-#   command: "docker swarm init"
-
-# - name: Tear down any existing "dev" stack
-#   become: true
-#   ignore_errors: yes
-#   command: "docker stack rm dev"
-
-# - name: Copy docker-compose.yml to /tmp/docker-compose.yml
-#   copy:
-#     src: docker-compose.yml
-#     dest: /tmp/docker-compose.yml
-
-# - name: Deploy stack on swarm "dev"
-#   become: true
-#   command: "docker stack deploy -c /tmp/docker-compose.yml dev"

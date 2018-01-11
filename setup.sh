@@ -7,8 +7,7 @@ usage()
   echo "Available Options:"
   echo " --help                Print this message."
   echo " --skip-ansible        Skip Ansible installation."
-  echo " --skip-go             Skip go installation."
-  echo " --skip-python         Skip python installation."
+  echo " --skip-requirements   Skip Requirements installation."
   echo " --skip-git            Skip git installation."
   exit 0
 }
@@ -19,10 +18,6 @@ while [ "$1" != "" ]; do
 
     case $1 in
       --skip-git )             skip_git=1
-                            ;;
-      --skip-python )          skip_python=1
-                            ;;
-      --skip-go )              skip_go=1
                             ;;
       --skip-ansible )         skip_ansible=1
                             ;;
@@ -44,49 +39,19 @@ fi
 if [ "$skip_requirements" != "1" ]; then
 # Update cache and essentials
 echo "Updating cache and preparing.."
-sudo apt-get update
-sudo apt-get install build-essential checkinstall -y
-sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
+sudo yum install epel-release
 fi
 
 if [ "$skip_git" != "1" ]; then
 # Install git
 echo "Setting up git.."
-sudo apt-get install git -y
-fi
-
-if [ "$skip_go" != "1" ]; then
-# Install go
-echo "Setting up go.."
-mkdir -p $HOME/elias-test/go
-sudo apt-get update
-sudo apt-get -y upgrade
-wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
-sudo tar -xvf go1.9.2.linux-amd64.tar.gz
-sudo mv go /usr/local
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/elias_test/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-fi
-
-if [ "$skip_python" != "1" ]; then
-# Download and Install Python 2.7.14
-echo "Setting up Python.."
-cd /usr/src
-wget https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tgz
-tar xzf Python-2.7.14.tgz
-cd Python-2.7.14
-sudo ./configure
-sudo make altinstall
+sudo yum install git
 fi
 
 if [ "$skip_ansible" != "1" ]; then
 # Download and Install Ansible
 echo "Setting up Ansible.."
-sudo apt-get install software-properties-common -y
-sudo apt-add-repository ppa:ansible/ansible -y
-sudo apt-get update 
-sudo apt-get install ansible -y
+sudo yum install ansible
 fi
 
 # Show distribution and release
