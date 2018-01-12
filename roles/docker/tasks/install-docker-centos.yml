@@ -1,24 +1,60 @@
 ---
 # Remove any old docker versions
-- name: Remove the docker package
-  yum:
-    name: docker
-    state: absent
+# - name: Remove the docker package
+#   yum:
+#     name: docker
+#     state: absent
 
-- name: Remove the docker-common package
-  yum:
-    name: docker-common
-    state: absent
+# - name: Remove the docker-common package
+#   yum:
+#     name: docker-common
+#     state: absent
 
-- name: Remove the docker-selinux package
-  yum:
-    name: docker-selinux
-    state: absent
+# - name: Remove the docker-selinux package
+#   yum:
+#     name: docker-selinux
+#     state: absent
 
-- name: Remove the docker-engine package
-  yum:
-    name: docker-engine
+# - name: Remove the docker-engine package
+#   yum:
+#     name: docker-engine
+#     state: absent
+
+- name: Ensure old versions of Docker are not installed.
+  package:
+    name: '{{ item }}'
     state: absent
+  with_items:
+    - docker
+    - docker-common
+    - docker-engine
+
+- name: Add Docker GPG key.
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: Add Docker repository.
+  get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    owner: root
+    group: root
+    mode: 0644 
+
+- name: Configure Docker Edge repo.
+  ini_file:
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    section: 'docker-{{ docker_edition }}-edge'
+    option: enabled
+    value: '{{ docker_yum_repo_enable_edge }}'
+
+- name: Configure Docker Test repo.
+  ini_file:
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    section: 'docker-{{ docker_edition }}-test'
+    option: enabled
+    value: '{{ docker_yum_repo_enable_test }}'
 
 # Install requirements
 # - name: Install yum-utils
@@ -58,28 +94,28 @@
 #   command: sudo yum check-update
 #   ignore_errors: yes
 
-- name: Download docker and install
-  become: true
-  command: curl -fsSL https://get.docker.com/ | sh
+# - name: Download docker and install
+#   become: true
+#   command: curl -fsSL https://get.docker.com/ | sh
 
-# Enable docker autostart
-- name: Set docker container service autostart to enabled
-  command: echo "Set docker container service autostart to enabled"
-  notify:
-    - enable autostart docker
-  when: docker_autostart
+# # Enable docker autostart
+# - name: Set docker container service autostart to enabled
+#   command: echo "Set docker container service autostart to enabled"
+#   notify:
+#     - enable autostart docker
+#   when: docker_autostart
 
-- name: Make sure docker container service is started
-  command: echo "Starting docker container service"
-  notify:
-    - start docker container service
+# - name: Make sure docker container service is started
+#   command: echo "Starting docker container service"
+#   notify:
+#     - start docker container service
 
-- name: Execute handlers before verifying docker installation
-  meta: flush_handlers
+# - name: Execute handlers before verifying docker installation
+#   meta: flush_handlers
 
-- name: Verify docker installation
-  command: docker run hello-world
-  register: docker_output
+# - name: Verify docker installation
+#   command: docker run hello-world
+#   register: docker_output
 
-- debug:
-    var: docker_output.stdout_lines
+# - debug:
+#     var: docker_output.stdout_lines
