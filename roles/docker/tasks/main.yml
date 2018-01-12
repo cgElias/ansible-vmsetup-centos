@@ -59,6 +59,7 @@
 #   ignore_errors: yes
 
 - name: Download docker and install
+  become: true
   command: curl -fsSL https://get.docker.com/ | sh
 
 # Enable docker autostart
