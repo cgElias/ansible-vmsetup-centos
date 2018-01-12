@@ -1,8 +1,15 @@
 ---
+# Requirements
+requirements:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
 # Edition can be 'ce' (Community Edition) or 'ee' (Enterprise Edition).
 docker_edition: 'ce'
 docker_package: "docker-{{ docker_edition }}"
 docker_package_state: present
+# docker_version_centos: "docker-ce-17.06.1.ce"
 
 # Docker Compose version and path
 docker_install_compose: true
