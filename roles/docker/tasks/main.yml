@@ -1,5 +1,4 @@
 ---
-
 # Remove any old docker versions
 - name: Remove the docker package
   yum:
@@ -54,9 +53,10 @@
 #     name: docker-ce
 #     disable_gpg_check: yes
 #     state: present
-- name: Update yum cache
-  command: sudo yum check-update
-  ignore_errors: yes
+
+# - name: Update yum cache
+#   command: sudo yum check-update
+#   ignore_errors: yes
 
 - name: Download docker and install
   command: curl -fsSL https://get.docker.com/ | sh
@@ -82,6 +82,3 @@
 
 - debug:
     var: docker_output.stdout_lines
-  
-
-  
