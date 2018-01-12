@@ -1,85 +1,18 @@
 ---
-# Remove any old docker versions
-- name: Remove the docker package
-  yum:
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Install Docker.
+  package: name={{ docker_package }} state={{ docker_package_state }}
+
+- name: Ensure Docker is started and enabled at boot.
+  service:
     name: docker
-    state: absent
+    state: started
+    enabled: yes
 
-- name: Remove the docker-common package
-  yum:
-    name: docker-common
-    state: absent
-
-- name: Remove the docker-selinux package
-  yum:
-    name: docker-selinux
-    state: absent
-
-- name: Remove the docker-engine package
-  yum:
-    name: docker-engine
-    state: absent
-
-# Install requirements
-# - name: Install yum-utils
-#   yum:
-#     name: yum-utils
-#     state: present
-
-# - name: Install device-mapper-persistent-data
-#   yum:
-#     name: device-mapper-persistent-data
-#     state: present
-
-# - name: Install lvm2
-#   yum:
-#     name: lvm2
-#     state: present
-
-- name: Install requirements
-  yum: name={{ item }} state=present
-  with_items: "{{ requirements }}"
-
-# - name: Add docker repo
-#   yum_repository:
-#     name: docker-ce
-#     description: docker-ce
-#     baseurl: "{{ docker_repository_url_centos }}"
-#     gpgcheck: no
-
-# Install Docker CE
-# - name: Install docker ce
-#   yum:
-#     name: docker-ce
-#     disable_gpg_check: yes
-#     state: present
-
-# - name: Update yum cache
-#   command: sudo yum check-update
-#   ignore_errors: yes
-
-- name: Download docker and install
-  become: true
-  command: curl -fsSL https://get.docker.com/ | sh
-
-# Enable docker autostart
-- name: Set docker container service autostart to enabled
-  command: echo "Set docker container service autostart to enabled"
-  notify:
-    - enable autostart docker
-  when: docker_autostart
-
-- name: Make sure docker container service is started
-  command: echo "Starting docker container service"
-  notify:
-    - start docker container service
-
-- name: Execute handlers before verifying docker installation
-  meta: flush_handlers
-
-- name: Verify docker installation
-  command: docker run hello-world
-  register: docker_output
-
-- debug:
-    var: docker_output.stdout_lines
+- include: docker-compose.yml
+  when: docker_install_compose

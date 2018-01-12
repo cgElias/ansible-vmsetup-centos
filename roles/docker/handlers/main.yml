@@ -9,17 +9,17 @@
     name: docker
     enabled: no
 
-- name: start docker container service
+- name: start docker
   systemd:
     name: docker
     state: started
 
-- name: stop docker container service
+- name: stop docker
   systemd:
     name: docker
     state: stopped
 
-- name: restart docker container service
+- name: restart docker
   systemd:
     name: docker
     state: restarted
