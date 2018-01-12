@@ -1,9 +1,9 @@
 ---
-- include: setup-RedHat.yml
+- import_tasks: install-docker-centos.yml
   when: ansible_os_family == 'RedHat'
 
-- include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+# - include: setup-Debian.yml
+#   when: ansible_os_family == 'Debian'
 
 - name: Install Docker.
   package: name={{ docker_package }} state={{ docker_package_state }}
@@ -14,5 +14,5 @@
     state: started
     enabled: yes
 
-- include: docker-compose.yml
+- import_tasks: install-docker-compose.yml
   when: docker_install_compose
