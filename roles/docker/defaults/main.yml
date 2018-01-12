@@ -5,6 +5,8 @@ requirements:
     - device-mapper-persistent-data
     - lvm2
 
+docker_autostart: yes
+
 # Edition can be 'ce' (Community Edition) or 'ee' (Enterprise Edition).
 docker_edition: 'ce'
 docker_package: "docker-{{ docker_edition }}"
