@@ -1,4 +1,11 @@
-- name: install the latest version of Apache
-  yum:
-    name: httpd
-    state: latest
+---
+- name: Create VM directories for httpd.
+  file: path={{ item }} 
+        state=directory 
+        mode="u=rwx,g=rwx,o=rx"
+  with_items: "{{ httpd_vm_directories}}"
+
+- name: Copy httpd.conf to mounted directory.
+  copy:
+    src: httpd.conf
+    dest: "{{ httpd_config_dir }}"

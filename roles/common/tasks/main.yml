@@ -1,0 +1,4 @@
+---
+- name: Install Tools. (netstat, telnet, atop, rsync, netcat)
+  package: name={{ item }} state=present
+  with_items: "{{ tools }}"

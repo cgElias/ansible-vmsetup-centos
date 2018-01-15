@@ -1,0 +1,7 @@
+---
+- name: Setup Apache httpd
+  hosts: localhost
+  become: true
+#  sudo: yes
+  roles:
+    - { role: httpd, tags: ["httpd"] }

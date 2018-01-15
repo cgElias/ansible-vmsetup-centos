@@ -11,6 +11,8 @@
     - docker
     - docker-common
     - docker-engine
+    - docker-ce
+    - docker-ee
 
 - name: Add Docker GPG key.
   rpm_key:
@@ -38,25 +40,3 @@
     section: 'docker-{{ docker_edition }}-test'
     option: enabled
     value: '{{ docker_yum_repo_enable_test }}'
-
-# Enable docker autostart
-- name: Set docker container service autostart to enabled
-  command: echo "Set docker container service autostart to enabled"
-  notify:
-    - enable autostart docker
-  when: docker_autostart
-
-# - name: Make sure docker container service is started
-#   command: echo "Starting docker container service"
-#   notify:
-#     - start docker container service
-
-- name: Execute handlers before verifying docker installation
-  meta: flush_handlers
-
-- name: Verify docker installation
-  command: docker run hello-world
-  register: docker_output
-
-- debug:
-    var: docker_output.stdout_lines

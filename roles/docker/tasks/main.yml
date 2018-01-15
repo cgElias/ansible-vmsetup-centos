@@ -2,9 +2,6 @@
 - import_tasks: install-docker-centos.yml
   when: ansible_os_family == 'RedHat'
 
-# - include: setup-Debian.yml
-#   when: ansible_os_family == 'Debian'
-
 - name: Install Docker.
   package: name={{ docker_package }} state={{ docker_package_state }}
 
@@ -14,5 +11,22 @@
     state: started
     enabled: yes
 
+# Enable docker autostart
+- name: Set docker container service autostart to enabled.
+  command: echo "Set docker container service autostart to enabled"
+  notify:
+    - enable autostart docker
+  when: docker_autostart
+
+- name: Execute handlers before verifying docker installation.
+  meta: flush_handlers
+
+- name: Verify docker installation.
+  command: docker run hello-world
+  register: docker_output
+
+- debug:
+    var: docker_output.stdout_lines
+    
 - import_tasks: install-docker-compose.yml
   when: docker_install_compose

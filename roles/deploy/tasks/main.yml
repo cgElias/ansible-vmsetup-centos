@@ -1,6 +1,0 @@
----
-- name: Create this VMs local directories
-  file: path={{ item }} 
-        state=directory 
-        mode="u=rwx,g=rwx,o=rx"
-  with_items: "{{ vm_directories}}"

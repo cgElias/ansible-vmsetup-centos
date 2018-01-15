@@ -1,0 +1,6 @@
+---
+- name: Create VM directories for artifactory.
+  file: path={{ item }} 
+        state=directory 
+        mode="u=rwx,g=rwx,o=rx"
+  with_items: "{{ artifactory_vm_directories}}"

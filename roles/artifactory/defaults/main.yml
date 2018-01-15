@@ -1,0 +1,4 @@
+artifactory_data:   "/data/artifactory"
+
+artifactory_vm_directories:
+  - "{{ artifactory_data }}"

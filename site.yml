@@ -1,0 +1,4 @@
+---
+- import_playbook: docker-install.yml
+- import_playbook: httpd-install.yml
+- import_playbook: artifactory-install.yml

@@ -1,0 +1,6 @@
+httpd_config_dir:   "/data/httpd/conf/"
+httpd_artifactory_ssl: "/data/artifactory-ssl"
+
+httpd_vm_directories:
+  - "{{ httpd_config_dir }}"
+  - "{{ httpd_artifactory_ssl }}"

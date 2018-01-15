@@ -1,0 +1,7 @@
+---
+- name: Setup Docker
+  hosts: localhost
+  become: true
+#  sudo: yes
+  roles:
+    - { role: docker, tags: ["docker"] }

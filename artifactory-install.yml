@@ -1,0 +1,7 @@
+---
+- name: Setup Artifactory using Docker
+  hosts: localhost
+  become: true
+#  sudo: yes
+  roles:
+    - { role: artifactory, tags: ["artifactory"] }
